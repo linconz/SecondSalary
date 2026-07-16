@@ -42,6 +42,14 @@ final class StatusItemController: NSObject {
         ) as? NSColor
     }
 
+    var displayedTitle: String {
+        statusItem.button?.attributedTitle.string ?? ""
+    }
+
+    var displayedImagePosition: NSControl.ImagePosition? {
+        statusItem.button?.imagePosition
+    }
+
     var displayedTitleBaselineOffset: Double? {
         statusItem.button?.attributedTitle.attribute(
             .baselineOffset,
@@ -135,6 +143,18 @@ final class StatusItemController: NSObject {
             }
             .store(in: &cancellables)
 
+        model.$showsEarningsInMenuBar
+            .removeDuplicates()
+            .sink { [weak self] showsEarnings in
+                guard let self else { return }
+                if !showsEarnings {
+                    highlightResetTask?.cancel()
+                    isHighlighted = false
+                }
+                applyTitle(lastDisplayedAmount, highlighted: isHighlighted)
+            }
+            .store(in: &cancellables)
+
         model.$emotionalPrompt
             .removeDuplicates()
             .sink { [weak self] prompt in
@@ -190,6 +210,13 @@ final class StatusItemController: NSObject {
     private func applyTitle(_ title: String, highlighted: Bool) {
         guard let button = statusItem.button else { return }
 
+        guard model.showsEarningsInMenuBar else {
+            button.attributedTitle = NSAttributedString()
+            button.imagePosition = .imageOnly
+            button.setAccessibilityLabel("SecondSalary 工资计数器")
+            return
+        }
+
         var attributes: [NSAttributedString.Key: Any] = [
             .font: NSFont.menuBarFont(ofSize: 0),
             .baselineOffset: Self.titleBaselineOffset
@@ -197,6 +224,7 @@ final class StatusItemController: NSObject {
         if highlighted {
             attributes[.foregroundColor] = NSColor.systemGreen
         }
+        button.imagePosition = .imageLeading
         button.attributedTitle = NSAttributedString(string: title, attributes: attributes)
         button.setAccessibilityLabel("今日累计工资，\(title)")
     }

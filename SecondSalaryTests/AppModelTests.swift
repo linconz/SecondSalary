@@ -257,6 +257,7 @@ final class AppModelTests: XCTestCase {
         XCTAssertTrue(first.saveSettings(
             settings(),
             refreshInterval: .thirtySeconds,
+            showsEarningsInMenuBar: false,
             launchAtLogin: false
         ))
         first.toggleSession(at: start)
@@ -273,6 +274,7 @@ final class AppModelTests: XCTestCase {
         XCTAssertEqual(restored.settings, first.settings)
         XCTAssertEqual(restored.dailyRecord, first.dailyRecord)
         XCTAssertEqual(restored.refreshInterval, .thirtySeconds)
+        XCTAssertFalse(restored.showsEarningsInMenuBar)
     }
 
     func testRefreshIntervalDoesNotChangeEarnings() {
@@ -331,6 +333,7 @@ final class AppModelTests: XCTestCase {
         XCTAssertTrue(model.saveSettings(
             settings(),
             refreshInterval: .oneMinute,
+            showsEarningsInMenuBar: false,
             launchAtLogin: true
         ))
         model.toggleSession()
@@ -342,6 +345,8 @@ final class AppModelTests: XCTestCase {
         XCTAssertNil(model.dailyRecord)
         XCTAssertFalse(model.launchAtLogin)
         XCTAssertEqual(model.refreshInterval, .oneSecond)
+        XCTAssertTrue(model.showsEarningsInMenuBar)
+        XCTAssertTrue(preferences.showsEarningsInMenuBar)
     }
 
     func testPersistenceLoadFailureIsPresented() {

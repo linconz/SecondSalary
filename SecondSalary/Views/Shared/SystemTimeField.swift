@@ -15,8 +15,8 @@ struct SystemTimeField: NSViewRepresentable {
         picker.datePickerMode = .single
         picker.calendar = .autoupdatingCurrent
         picker.locale = .autoupdatingCurrent
-        picker.isBezeled = true
-        picker.isBordered = true
+        picker.isBezeled = false
+        picker.isBordered = false
         picker.dateValue = selection
         picker.target = context.coordinator
         picker.action = #selector(SystemTimeFieldCoordinator.selectionChanged(_:))

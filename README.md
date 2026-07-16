@@ -2,8 +2,6 @@
 
 SecondSalary 是一个本地运行的 macOS 菜单栏工资计数器。设置月薪、当月工作天数、上班时间和下班时间后，点击“开始搬砖”即可按实际搬砖时长实时查看今天已经“赚到”的工资。
 
-
-
 ## 界面预览
 
 ### 菜单栏弹窗
@@ -21,6 +19,7 @@ SecondSalary 是一个本地运行的 macOS 菜单栏工资计数器。设置月
 ## 功能
 
 - 菜单栏常驻显示今日累计工资
+- 可关闭菜单栏金额，只保留应用图标
 - 在上班、午休和下班节点展示情感化气泡提醒
 - 当天首次在工作时段内点击“开始搬砖”时，从设置的上班时间计算今日薪水
 - 在工作时段外开始搬砖不会累计薪水，并显示“还未到工作时间”；到达下班时间后自动停止累计
@@ -45,6 +44,14 @@ SecondSalary 是一个本地运行的 macOS 菜单栏工资计数器。设置月
 
 刷新频率仅控制界面多久更新一次。实际金额始终根据搬砖开始和结束时间计算，不会因为选择每小时刷新而少算。
 
+## 下载安装
+
+1. 从 [GitHub Releases](https://github.com/linconz/SecondSalary/releases) 下载 `SecondSalary-1.0.0.dmg`。
+2. 打开 DMG，将 `SecondSalary` 拖到 `Applications`。
+3. 首次启动时，如果 macOS 提示无法验证开发者，请在“应用程序”中按住 Control 点击 `SecondSalary`，选择“打开”，然后再次确认“打开”。无需关闭 Gatekeeper。
+
+当前发布包使用临时签名，未使用 Developer ID 证书，也未经过 Apple 公证，因此 macOS 可能显示安全确认提示。
+
 ## 系统要求
 
 - macOS 13 或更高版本
@@ -60,7 +67,7 @@ SecondSalary 是一个本地运行的 macOS 菜单栏工资计数器。设置月
 3. 选择 `SecondSalary` Scheme 和 `My Mac`。
 4. 在 Signing 中使用 `Sign to Run Locally`，然后运行。
 
-本机开发和从源码构建不需要付费 Apple Developer Program。由于 Developer ID 签名和 Apple 公证需要付费会员，本项目目前不提供未公证的二进制应用；请勿为了安装本项目而关闭 Gatekeeper。
+本机开发和从源码构建不需要付费 Apple Developer Program。Developer ID 签名和 Apple 公证需要付费会员；GitHub Releases 中的 DMG 使用临时签名，不需要证书，但不能消除 Gatekeeper 的首次启动提示。
 
 命令行构建：
 

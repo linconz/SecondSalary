@@ -25,6 +25,8 @@ final class SystemTimeFieldTests: XCTestCase {
         let picker = try XCTUnwrap(firstDatePicker(in: hostingView))
         XCTAssertEqual(picker.datePickerStyle, .textFieldAndStepper)
         XCTAssertEqual(picker.datePickerElements, .hourMinute)
+        XCTAssertFalse(picker.isBezeled)
+        XCTAssertFalse(picker.isBordered)
         XCTAssertNotNil(picker.target)
         XCTAssertNotNil(picker.action)
 

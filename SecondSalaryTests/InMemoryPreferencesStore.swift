@@ -4,5 +4,6 @@ import Foundation
 @MainActor
 final class InMemoryPreferencesStore: PreferencesStoring {
     var refreshInterval: RefreshInterval = .oneSecond
+    var showsEarningsInMenuBar = true
     var launchAtLoginRequested = false
 }

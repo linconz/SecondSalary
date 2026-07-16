@@ -10,6 +10,7 @@ struct SettingsView: View {
     @State private var workEndTime: Date
     @State private var currency: CurrencyOption
     @State private var refreshInterval: RefreshInterval
+    @State private var showsEarningsInMenuBar: Bool
     @State private var launchAtLogin: Bool
     @State private var didSave = false
     @State private var isShowingResetConfirmation = false
@@ -36,6 +37,7 @@ struct SettingsView: View {
         )
         _currency = State(initialValue: settings?.currency ?? .cny)
         _refreshInterval = State(initialValue: model.refreshInterval)
+        _showsEarningsInMenuBar = State(initialValue: model.showsEarningsInMenuBar)
         _launchAtLogin = State(initialValue: model.launchAtLogin)
     }
 
@@ -89,6 +91,8 @@ struct SettingsView: View {
                             Text(interval.displayName).tag(interval)
                         }
                     }
+                    Toggle("菜单栏显示", isOn: $showsEarningsInMenuBar)
+                        .help("关闭后菜单栏只显示图标")
                     Toggle("登录时启动", isOn: $launchAtLogin)
                 }
 
@@ -166,6 +170,7 @@ struct SettingsView: View {
         didSave = model.saveSettings(
             settings,
             refreshInterval: refreshInterval,
+            showsEarningsInMenuBar: showsEarningsInMenuBar,
             launchAtLogin: launchAtLogin
         )
     }
@@ -194,6 +199,7 @@ struct SettingsView: View {
         )
         currency = .cny
         refreshInterval = .oneSecond
+        showsEarningsInMenuBar = true
         launchAtLogin = false
         didSave = false
     }

@@ -7,6 +7,7 @@ final class AppModel: NSObject, ObservableObject {
     @Published private(set) var settings: CompensationSettings?
     @Published private(set) var dailyRecord: DailyWorkRecord?
     @Published private(set) var refreshInterval: RefreshInterval
+    @Published private(set) var showsEarningsInMenuBar: Bool
     @Published private(set) var launchAtLogin: Bool
     @Published private(set) var displayDate: Date
     @Published private(set) var emotionalPrompt: EmotionalPromptPresentation?
@@ -60,6 +61,7 @@ final class AppModel: NSObject, ObservableObject {
         dailyRecord = loadedState?.dailyRecord
         dayStart = loadedState?.dayStart ?? today
         refreshInterval = preferences.refreshInterval
+        showsEarningsInMenuBar = preferences.showsEarningsInMenuBar
         launchAtLogin = loginItemManager.isEnabled
         displayDate = now
         emotionalPrompt = nil
@@ -193,6 +195,7 @@ final class AppModel: NSObject, ObservableObject {
     func saveSettings(
         _ newSettings: CompensationSettings,
         refreshInterval newRefreshInterval: RefreshInterval,
+        showsEarningsInMenuBar newShowsEarningsInMenuBar: Bool = true,
         launchAtLogin requestedLaunchAtLogin: Bool
     ) -> Bool {
         handleTick(at: .now)
@@ -217,6 +220,8 @@ final class AppModel: NSObject, ObservableObject {
 
         refreshInterval = newRefreshInterval
         preferences.refreshInterval = newRefreshInterval
+        showsEarningsInMenuBar = newShowsEarningsInMenuBar
+        preferences.showsEarningsInMenuBar = newShowsEarningsInMenuBar
         updateLaunchAtLogin(requestedLaunchAtLogin)
         refreshDisplay(at: .now)
         restartEmotionalPromptSchedule(after: .now, includingCurrentMinute: true)
@@ -245,8 +250,10 @@ final class AppModel: NSObject, ObservableObject {
         dailyRecord = nil
         dayStart = calendar.startOfDay(for: .now)
         refreshInterval = .oneSecond
+        showsEarningsInMenuBar = true
         displayDate = .now
         preferences.refreshInterval = .oneSecond
+        preferences.showsEarningsInMenuBar = true
         hasRequestedInitialSettings = false
         workStartedPromptTask?.cancel()
         clearEmotionalPrompts()

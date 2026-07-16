@@ -62,4 +62,38 @@ final class StatusItemControllerTests: XCTestCase {
         try await Task.sleep(for: .milliseconds(850))
         XCTAssertNil(controller.displayedTitleColor)
     }
+
+    func testDisablingMenuBarDisplayLeavesOnlyTheIcon() {
+        let model = AppModel(
+            secureStore: InMemorySecureStateStore(),
+            preferences: InMemoryPreferencesStore(),
+            loginItemManager: InMemoryLoginItemManager(),
+            observesSystemEvents: false
+        )
+        let controller = StatusItemController(
+            model: model,
+            openSettings: {},
+            openAbout: {}
+        )
+        defer { controller.invalidate() }
+
+        XCTAssertFalse(controller.displayedTitle.isEmpty)
+        XCTAssertEqual(controller.displayedImagePosition, .imageLeading)
+
+        XCTAssertTrue(model.saveSettings(
+            CompensationSettings(
+                monthlySalary: 20_000,
+                monthlyWorkdays: 21,
+                workStartMinute: 9 * 60,
+                workEndMinute: 17 * 60,
+                currency: .cny
+            ),
+            refreshInterval: .oneSecond,
+            showsEarningsInMenuBar: false,
+            launchAtLogin: false
+        ))
+
+        XCTAssertTrue(controller.displayedTitle.isEmpty)
+        XCTAssertEqual(controller.displayedImagePosition, .imageOnly)
+    }
 }
