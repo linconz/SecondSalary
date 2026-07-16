@@ -1,8 +1,22 @@
 # SecondSalary
 
-SecondSalary 是一个完全本地运行的 macOS 菜单栏工资计数器。设置月薪、当月工作日、上班时间和下班时间后，点击“开始搬砖”即可按实际搬砖时长实时查看今天已经“赚到”的工资。
+SecondSalary 是一个本地运行的 macOS 菜单栏工资计数器。设置月薪、当月工作天数、上班时间和下班时间后，点击“开始搬砖”即可按实际搬砖时长实时查看今天已经“赚到”的工资。
 
-![SecondSalary 应用图标](Design/AppIcon.svg)
+
+
+## 界面预览
+
+### 菜单栏弹窗
+
+![SecondSalary 菜单栏弹窗，显示今日累计收入、今日搬砖时长和当前秒薪](screenshots/screenshot-popview.png)
+
+点击菜单栏中的 SecondSalary，即可在弹窗中查看今日累计收入、今日搬砖时长和当前秒薪，并开始或结束搬砖计时。
+
+### 设置页
+
+![SecondSalary 设置页，可设置月薪、工作日、上下班时间、刷新频率和薪水单位](screenshots/screenshot-settings.png)
+
+设置页支持配置月薪、当月工作日、上下班时间、刷新频率、登录时启动和薪水单位（币种）。
 
 ## 功能
 
@@ -15,7 +29,7 @@ SecondSalary 是一个完全本地运行的 macOS 菜单栏工资计数器。设
 - 系统睡眠、退出或关机时自动结束当前搬砖
 - 跨过本地零点后自动开始新的当天记录
 - 每次开始时保存当时的秒薪快照，修改设置不会改写已有金额
-- 支持 CNY、USD、EUR、GBP、JPY、HKD、SGD、AUD 和 KRW
+- 支持多种货币类型
 - 月薪与当天记录保存在 macOS 钥匙串
 - 无网络请求、无分析 SDK、无云同步、无第三方运行时依赖
 
@@ -95,6 +109,6 @@ xcodebuild \
 
 ## 许可证
 
-Copyright (C) 2026 zhangyilin
+Copyright (C) 2026 linconz
 
 本项目采用 [GNU General Public License v3.0 only](LICENSE) 发布。
