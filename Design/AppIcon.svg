@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#17343A"/>
+      <stop offset="1" stop-color="#0A171B"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFE08A"/>
+      <stop offset="1" stop-color="#E7A92E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="224" fill="url(#background)"/>
+  <circle cx="430" cy="440" r="250" fill="url(#coin)"/>
+  <circle cx="430" cy="440" r="204" fill="none" stroke="#8C5A13" stroke-width="22" opacity="0.48"/>
+  <path d="M430 292v296M344 330c28-26 58-38 91-38 62 0 105 36 105 83 0 42-30 66-91 83-66 18-99 42-99 86 0 51 45 88 112 88 40 0 77-13 106-39" fill="none" stroke="#58370D" stroke-width="38" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="688" cy="676" r="212" fill="#F5F2E8" stroke="#FFFFFF" stroke-width="28"/>
+  <circle cx="688" cy="676" r="158" fill="none" stroke="#17343A" stroke-width="18" opacity="0.18"/>
+  <path d="M688 552v130l92 54" fill="none" stroke="#17343A" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="688" cy="676" r="20" fill="#17343A"/>
+</svg>
